@@ -1,3 +1,6 @@
+# läuft auf localhost:8050 im debug mode
+# .env für die MySQL DB
+
 import os
 from dotenv import load_dotenv
 import dash
@@ -18,6 +21,7 @@ import dash_bootstrap_components as dbc
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+server = app.server
 
 colors = {
     'background': '#f9f7f7',
@@ -266,7 +270,7 @@ fig_sales_qty = px.bar(df_sales_qty, x="smonth",
 app.layout = dbc.Container(
     [
         dbc.Row(dbc.Col(
-            html.H1("Daten einfach verfügbar", className="display-1")
+            html.H1("Data-driven Decisions", className="display-1")
         )),
         dbc.Row(dbc.Col(html.Hr())),
         dbc.Row([dbc.Col([
@@ -274,6 +278,7 @@ app.layout = dbc.Container(
                 "Daten nutzen, um bessere Entscheidungen schneller zu treffen.", className="lead"),
             html.Hr(),
             html.P("Historisch gewachsene SQL Datenbanken, diverse Cloud und SaaS Lösungen und dann gibt es da noch eine Reihe von Excel Dateien? Wieviel Zeit investieren Sie, um die relevanten Daten zu finden, aufzubereiten und für wichtige Entscheidungen zu analysieren?"),
+            html.P("Lassen Sie uns im persönlichen Gespräch Ihre Fragen und Anforderungen klären. Im Blog und in den Unterlagen zum Download finden Sie weitere Informationen."),
             dbc.Button("Termin vereinbaren",
                        href="mailto:kontakt@pschwan.de",
                        color="danger", block=True),
@@ -290,7 +295,7 @@ app.layout = dbc.Container(
              - **FastAPI** = API Data Layer, um Daten und Dashboard zu verbinden (serverless in der Cloud)
              - **Plotly Dash** = Dashboard und Data App Funktionen (Cloud PaaS)
 
-             Anm.: Es geht um die Daten und Anbindung, nicht um Information Design und UX. Für das Dashboard werden größtenteils Bootstrap Komponenten eingesetzt.
+             *Anm.:* Es geht um die Daten und Anbindung, nicht um Information Design und UX. Für das Dashboard werden größtenteils Bootstrap Komponenten eingesetzt.
              
              '''), color="secondary"
             )
@@ -301,9 +306,9 @@ app.layout = dbc.Container(
             dbc.Col(html.H2("KPI Indikatoren - den aktuellen Status prüfen",
                             className="display-4")),
             dbc.Col(dbc.Alert(dcc.Markdown('''
-                    #### keine Zeit?
+                    #### Nur wenig Zeit?
                     - High-Level Indikatoren, um aggregierte KPIs zu visualisieren
-                    - Kombiniere Zahl, Delta, Grafik und Chart
+                    - Kombinationen von Kennzahl, Abweichung Soll/Ist, Grafik und Chart
                     '''), color="secondary"))
         ]),
         dbc.Row(
@@ -340,13 +345,14 @@ app.layout = dbc.Container(
         ),
         dbc.Row(dbc.Col(html.Hr())),
         dbc.Row([
-            dbc.Col(html.H2("Einfach KPI Charts - Zusammenhänge und Beziehungen schnell erfassen",
+            dbc.Col(html.H2("KPI Charts - Zusammenhänge und Beziehungen schnell erfassen",
                             className="display-4")),
             dbc.Col(dbc.Alert(dcc.Markdown('''
-                    #### Es ist interaktiv - probiere es aus:
+                    #### Interaktiv - probieren Sie es aus:
                     - Die Slider anpassen und die **Jahre auswählen**
                     - Die Maus über die Graphen bewegen und die **out-of-the-box Features** kennenlernen
                     - Zum Beispiel: Zoomen oder die Charts als Grafik speichern!
+                    - *Tipp:* der Home-Button bzw. das kleine Haus bringt Sie auch im Tablet Modus wieder zum ursprünglichen Graphen
                     '''), color="danger"))
         ]),
         dbc.Row(
@@ -403,6 +409,7 @@ app.layout = dbc.Container(
                             - Sind diese Daten verfügbar? Warum nicht?
                             - "Wir haben keine interne IT..."
                             '''),
+                        html.P("Lassen Sie uns im persönlichen Gespräch Ihre Fragen und Anforderungen klären. Im Blog und in den Unterlagen zum Download finden Sie weitere Informationen."),
                     ]),
                     dbc.Col([
                         dbc.Button("Termin vereinbaren",
@@ -546,6 +553,7 @@ app.layout = dbc.Container(
                             - Sie können den Projektumfang nicht abschätzen?
                             - Die **Herausforderungen entstehen in der täglichen Arbeit**?
                             '''),
+                        html.P("Lassen Sie uns im persönlichen Gespräch Ihre Fragen und Anforderungen klären. Im Blog und in den Unterlagen zum Download finden Sie weitere Informationen."),
                     ]),
                     dbc.Col([
                         dbc.Button("Termin vereinbaren",
@@ -648,5 +656,5 @@ def update_data(cust, news):
 ########################################
 # Server
 if __name__ == '__main__':
-    # app.run_server(host='0.0.0.0', port=8050, debug=True)
-    app.run_server(debug=True)
+    app.run_server(host='0.0.0.0', port=8050, debug=True)
+    # app.run_server(debug=True)
