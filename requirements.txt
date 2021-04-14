@@ -1,0 +1,6 @@
+dash==1.19.0
+pandas==1.2.2
+mysql-connector-python==8.0.23
+dash-bootstrap-components==0.11.3
+requests==2.25.1
+python-dotenv==0.16.0
